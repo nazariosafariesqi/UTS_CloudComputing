@@ -1,9 +1,12 @@
-FROM ubuntu:18.04
+FROM node:6.17-alpine
 
-RUN apt-get update && \
-    apt-get upgrade && \
-    apt-get clean
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+COPY ./app $APP_HOME
+
 
 EXPOSE 7777
 
-ENTRYPOINT ["index.php"]
+ENTRYPOINT ["kuis2", "index.php"]
